@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE carte SYSTEM "carte.dtd">
+<carte numero="880692310285">
+    <recto>
+        <photo scr=""/>
+        <nom>BERTHIER</nom>
+        <prenom>CORINE</prenom>
+        <sexe valeur="F"/>
+        <naissance date="06/12/1965" lieu="PARIS 1ER (75)"/>
+        <taille>1M70</taille>
+        <signature src=""/>
+    </recto>
+    <verso>
+        <adresse>104 RUE DES FLEURS 92100 BOULOGNE BILLANCOURT (92)</adresse>
+        <date delivrance="21/06/1998" expiration="22/06/1988"/>
+        <par>SOUS-PREFECTURE DE BOULOGNE BILLANCOURT (92)</par>
+    </verso>
+</carte>

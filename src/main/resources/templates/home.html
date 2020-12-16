@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Theme Made By www.w3schools.com - No Copyright -->
+    <title>Bootstrap Theme Simply Me</title>
+    <link rel="icon" href="/img/ionis-stm-logo-2020-quadri.png">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+<!-- Navbar -->
+<div th:replace="fragments/header :: header">&nbsp;</div>
+<!-- First Container -->
+<div class="container-fluid bg-1 text-center">
+    <div class="row">
+        <div class="col-sm-6">
+            <h3 class="margin">Thème 4 :</h3>
+            <h3 class="mb-4">représentation des données présentes sur l’ensemble des cartes d’identité nationales des pays de la Communauté Européenne</h3>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span  class="text-primary">TAMOUD Lyna</span>
+                    <span class="badge badge-primary badge-pill"><a href="mailto:lyna.tamoud@ionis-stm.com" class="text-white h6">lyna.tamoud@ionis-stm.com</a></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span  class="text-primary">RATNASINGAM Tharminaa</span>
+                    <span class="badge badge-primary badge-pill"><a href="mailto:tharminaa.ratnasingam@ionis-stm.com" class="text-white h6">tharminaa.ratnasingam@ionis-stm.com</a></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span  class="text-primary">MOMO Adrien Nickson</span>
+                    <span class="badge badge-primary badge-pill"><a href="mailto:adrien-nickson.momo@ionis-stm.com" class="text-white h6">adrien-nickson.momo@ionis-stm.com</a></span>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-6">
+            <img src="/img/ionis-stm-logo-2020-quadri.png" class="img-responsive margin" style="display:inline" alt="ionis-stm" width="350" height="350">
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="container-fluid bg-4 text-center">
+    <p>&copy; IONIS-STM</p>
+</footer>
+
+</body>
+</html>

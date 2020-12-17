@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Theme Made By www.w3schools.com - No Copyright -->
+    <title>Bootstrap Theme Simply Me</title>
+    <link rel="icon" href="/img/ionis-stm-logo-2020-quadri.png">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+<!-- Navbar -->
+<div th:replace="fragments/header :: header">&nbsp;</div>
+<!-- First Container -->
+<div class="container-fluid bg-1 text-center">
+    <div class="row">
+        <div class="col-sm-6" th:each="carte: ${cartes}">
+            <div class="xmlcard">
+                <div class="xmlcard-title">
+                    <h1>République Francaise</h1>
+                </div>
+                <div class="xmlcard-id">
+                    <div class="xmlcard-number">
+                        <p class="xmlcardtitle">Carte nationale d'identité :</p>
+                        <p th:text="${carte.numero}"></p>
+                    </div>
+                    <p class="xmlcardtitle">Nationalité Francaise</p>
+                </div>
+                <div class="xmlcard-information">
+                    <div class="xmlcard-photo" th:style="'background: url(/img/' + ${carte.photo} + ') no-repeat, #BFAE99;;'"></div>
+                    <div class="xmlcard-text">
+                        <div class="xmlcard-name">
+                            <div class="xmlcard-box">
+                                <p class="xmlcardtitle">Nom :</p>
+                                <p th:text="${carte.nom}"></p>
+                                &emsp;
+                                <p class="xmlcardtitle">Prénom :</p>
+                                <p th:text="${carte.prenom}"></p>
+                            </div>
+                        </div>
+                        <div class="xmlcard-detail">
+                            <div class="xmlcard-box">
+                                <p class="xmlcardtitle">Sexe :</p>
+                                <p th:text="${carte.sexe}"></p>
+                            </div>
+                            <div class="xmlcard-box">
+                                <p class="xmlcardtitle">Né(e) le :</p>
+                                <p th:text="${carte.dateNaissance}"></p>
+                            </div>
+                            <div class="xmlcard-box">
+                                <p class="xmlcardtitle">Ville :</p>
+                                <p th:text="${carte.lieuNaissance}"></p>
+                            </div>
+                        </div>
+                        <div class="xmlcard-sign">
+                            <p class="xmlcardtitle">Signature du titulaire :</p>
+                            <div class="xmlcardsign" th:style="'background: no-repeat url(/img/' + ${carte.signature} + ');'"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="xmlcard-code">
+                    <p>
+                        <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< <br> <<<<<<<<<<<<<<<<<<<<<<<<
+                    </p>
+                </div>
+            </div>
+
+
+            <span th:text="${carte.photo}"></span>
+            ---
+            <span th:text="${carte.taille}"></span>
+            <span th:text="${carte.signature}"></span>
+            <span th:text="${carte.adresse}"></span>
+            <span th:text="${carte.dateDelivrance}"></span>
+            <span th:text="${carte.dateExpiration}"></span>
+            <span th:text="${carte.par}"></span>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="container-fluid bg-4 text-center">
+    <p>&copy; IONIS-STM</p>
+</footer>
+
+</body>
+</html>

@@ -4,29 +4,31 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.w3c.dom.*;
-import org.xml.sax.SAXException;
-import org.xml.sax.ErrorHandler;
-import org.xml.sax.SAXParseException;
 
 
 @Controller
-public class MainController {
-    @GetMapping("/")
+public class MainController2 {
+//    @GetMapping("/")
     public String homePage() {
         return "home";
     }
 
-    @GetMapping("/all")
+//    @GetMapping("/all")
     public String allIDs(Model model) {
         // Nous récupérons une instance de factory qui se chargera de nous fournir
         // un parseur
@@ -34,7 +36,6 @@ public class MainController {
         try {
             //Méthode qui permet d'activer la vérification du fichier
             factory.setValidating(true);
-            factory.setIgnoringElementContentWhitespace(true);
             // Création de notre parseur via la factory
             DocumentBuilder builder = factory.newDocumentBuilder();
             //création de notre objet d'erreurs
@@ -72,7 +73,7 @@ public class MainController {
         return "all";
     }
 
-    @GetMapping("/one")
+//    @GetMapping("/one")
     public String oneID(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
         model.addAttribute("name", name);
         return "greeting";
@@ -97,19 +98,47 @@ public class MainController {
             e.printStackTrace();
         }
 
-        map.put("photo", n.getChildNodes().item(0).getChildNodes().item(0).getAttributes().item(0).getNodeValue());
-        map.put("nom", n.getChildNodes().item(0).getChildNodes().item(1).getTextContent());
-        map.put("prenom", n.getChildNodes().item(0).getChildNodes().item(2).getTextContent());
-        map.put("sexe", n.getChildNodes().item(0).getChildNodes().item(3).getAttributes().item(0).getNodeValue());
-        map.put("dateNaissance", n.getChildNodes().item(0).getChildNodes().item(4).getAttributes().item(0).getNodeValue());
-        map.put("lieuNaissance", n.getChildNodes().item(0).getChildNodes().item(4).getAttributes().item(1).getNodeValue());
-        map.put("taille", n.getChildNodes().item(0).getChildNodes().item(5).getTextContent());
-        map.put("signature", n.getChildNodes().item(0).getChildNodes().item(6).getAttributes().item(0).getNodeValue());
+        map.put("photo", n.getChildNodes().item(1).getChildNodes().item(1).getAttributes().item(0).getNodeValue());
 
-        map.put("adresse", n.getChildNodes().item(1).getChildNodes().item(0).getTextContent());
-        map.put("dateDelivrance", n.getChildNodes().item(1).getChildNodes().item(1).getAttributes().item(0).getNodeValue());
-        map.put("dateExpiration", n.getChildNodes().item(1).getChildNodes().item(1).getAttributes().item(1).getNodeValue());
-        map.put("par", n.getChildNodes().item(1).getChildNodes().item(2).getTextContent());
+        for (int i = 0; i < n.getChildNodes().getLength(); i++) {
+            if (n.getChildNodes().item(i) instanceof Element){
+                for (int j = 0; j < n.getChildNodes().item(i).getChildNodes().getLength(); j++) {
+                    if (n.getChildNodes().item(i).getChildNodes().item(j) instanceof Element) {
+                        switch (n.getChildNodes().item(i).getChildNodes().item(j).getNodeName()){
+                            case "nom":
+                                map.put("nom", n.getChildNodes().item(i).getChildNodes().item(j).getTextContent());
+                                break;
+                            case "prenom":
+                                map.put("prenom", n.getChildNodes().item(i).getChildNodes().item(j).getTextContent());
+                                break;
+                            case "sexe":
+                                map.put("sexe", n.getChildNodes().item(i).getChildNodes().item(j).getAttributes().item(0).getNodeValue());
+                                break;
+                            case "naissance":
+                                map.put("dateNaissance", n.getChildNodes().item(i).getChildNodes().item(j).getAttributes().item(0).getNodeValue());
+                                map.put("lieuNaissance", n.getChildNodes().item(i).getChildNodes().item(j).getAttributes().item(1).getNodeValue());
+                                break;
+                            case "taille":
+                                map.put("taille", n.getChildNodes().item(i).getChildNodes().item(j).getTextContent());
+                                break;
+                            case "signature":
+                                map.put("signature", n.getChildNodes().item(i).getChildNodes().item(j).getAttributes().item(0).getNodeValue());
+                                break;
+                            case "adresse":
+                                map.put("adresse", n.getChildNodes().item(i).getChildNodes().item(j).getTextContent());
+                                break;
+                            case "date":
+                                map.put("dateDelivrance", n.getChildNodes().item(i).getChildNodes().item(j).getAttributes().item(0).getNodeValue());
+                                map.put("dateExpiration", n.getChildNodes().item(i).getChildNodes().item(j).getAttributes().item(1).getNodeValue());
+                                break;
+                            case "par":
+                                map.put("par", n.getChildNodes().item(i).getChildNodes().item(j).getTextContent());
+                                break;
+                        }
+                    }
+                }
+            }
+        }
 
         return map;
     }
@@ -117,18 +146,3 @@ public class MainController {
 }
 
 
-class SimpleErrorHandler implements ErrorHandler {
-    public void warning(SAXParseException e) throws SAXException {
-        System.out.println("WARNING : " + e.getMessage());
-    }
-
-    public void error(SAXParseException e) throws SAXException {
-        System.out.println("ERROR : " + e.getMessage());
-        throw e;
-    }
-
-    public void fatalError(SAXParseException e) throws SAXException {
-        System.out.println("FATAL ERROR : " + e.getMessage());
-        throw e;
-    }
-}

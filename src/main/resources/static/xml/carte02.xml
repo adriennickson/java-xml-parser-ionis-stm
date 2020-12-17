@@ -2,13 +2,13 @@
 <!DOCTYPE carte SYSTEM "carte.dtd">
 <carte numero="880692310285">
     <recto>
-        <photo src="img_avatar01.png"/>
-        <nom>BERTHIER</nom>
+        <photo src="img_avatar02.png"/>
+        <nom>TOMAS</nom>
         <prenom>CORINE</prenom>
         <sexe valeur="F"/>
         <naissance date="06/12/1965" lieu="PARIS 1ER (75)"/>
         <taille>1M70</taille>
-        <signature src="signature01.png"/>
+        <signature src="signature02.png"/>
     </recto>
     <verso>
         <adresse>104 RUE DES FLEURS 92100 BOULOGNE BILLANCOURT (92)</adresse>

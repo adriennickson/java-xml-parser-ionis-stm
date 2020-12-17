@@ -1,17 +1,24 @@
 <!ELEMENT carte (recto,verso) >
-        <!ELEMENT recto (photo,nom,prenom,sexe,naissance,taille,signature) >
-        <!ELEMENT verso (adresse,date,par) >
+<!ELEMENT recto (photo,nom,prenom,sexe,naissance,taille,signature) >
+<!ELEMENT verso (adresse,date,par) >
 
-        <!ELEMENT nom (#PCDATA) >
-        <!ELEMENT prenom (#PCDATA) >
-        <!ELEMENT taille (#PCDATA) >
-        <!ELEMENT adresse (#PCDATA) >
-        <!ELEMENT par (#PCDATA) >
+<!ELEMENT nom (#PCDATA) >
+<!ELEMENT prenom (#PCDATA) >
+<!ELEMENT taille (#PCDATA) >
+<!ELEMENT adresse (#PCDATA) >
+<!ELEMENT par (#PCDATA) >
+<!ELEMENT photo EMPTY >
+<!ELEMENT sexe EMPTY >
+<!ELEMENT naissance EMPTY >
+<!ELEMENT signature EMPTY >
+<!ELEMENT date EMPTY >
 
-        <!ATTLIST carte numero ID #REQUIRED >
-        <!ATTLIST sexe valeur CDATA #REQUIRED >
-        <!ATTLIST naissance date CDATA #REQUIRED >
-        <!ATTLIST naissance lieu CDATA #REQUIRED >
-        <!ATTLIST photo src CDATA #IMPLIED >
-        <!ATTLIST signature src CDATA #IMPLIED >
+<!ATTLIST carte numero CDATA #REQUIRED >
+<!ATTLIST sexe valeur CDATA #REQUIRED >
+<!ATTLIST naissance date CDATA #REQUIRED
+                    lieu CDATA #REQUIRED >
+<!ATTLIST date delivrance CDATA #REQUIRED
+                expiration CDATA #REQUIRED >
+<!ATTLIST photo src CDATA #IMPLIED >
+<!ATTLIST signature src CDATA #IMPLIED >
 

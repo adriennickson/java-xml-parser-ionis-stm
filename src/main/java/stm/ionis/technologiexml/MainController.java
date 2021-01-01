@@ -1,13 +1,18 @@
 package stm.ionis.technologiexml;
 
+import com.lowagie.text.DocumentException;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import java.io.File;
-import java.io.IOException;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.xml.parsers.DocumentBuilder;
@@ -17,7 +22,12 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.springframework.web.servlet.view.RedirectView;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.w3c.dom.*;
+import org.xhtmlrenderer.pdf.ITextRenderer;
 import org.xml.sax.SAXException;
 import org.xml.sax.ErrorHandler;
 
@@ -53,6 +63,50 @@ public class MainController {
     public RedirectView postOneByID(@ModelAttribute Carte carte) {
         saveCarte(carte);
         return new RedirectView("/all");
+    }
+
+    @GetMapping("/pdf")
+    public ResponseEntity<byte[]> getPDFByID(@RequestParam(name="id", required=false, defaultValue="880692310285") String id, Model model) {
+        ArrayList<Carte> cartes = getCartes();
+        Carte carte = new Carte(null);
+        for (int i = 0; i < cartes.size(); i++) {
+            if (cartes.get(i).getNumero().equals(id)){
+                carte = cartes.get(i);
+            }
+        }
+
+        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+        templateResolver.setSuffix(".html");
+        templateResolver.setTemplateMode(TemplateMode.HTML);
+
+        TemplateEngine templateEngine = new TemplateEngine();
+        templateEngine.setTemplateResolver(templateResolver);
+
+        Context context = new Context();
+        context.setVariable("carte", carte);
+
+        String html =  templateEngine.process("templates/pdf", context);
+
+        String filename = "carte.pdf";
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+        ITextRenderer renderer = new ITextRenderer();
+        renderer.setDocumentFromString(html);
+        renderer.layout();
+        try {
+            renderer.createPDF(outputStream);
+        }catch (DocumentException e){
+            e.printStackTrace();
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+
+        headers.setContentDispositionFormData(filename, filename);
+        headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+        ResponseEntity<byte[]> response = new ResponseEntity<>(outputStream.toByteArray(), headers, HttpStatus.OK);
+        return response;
+
     }
 
     /**
@@ -245,4 +299,5 @@ public class MainController {
 
         return;
     }
+
 }

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        .xmlcard h1{
+            font-family: 'Arvo', serif;
+            font-weight: lighter;
+            font-size: 25px;
+        }
+
+        .xmlcard .xmlcard-cardtitle {
+            font-family: 'Bitter', serif;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .xmlcard {
+            border: solid 2px #000;
+            border-radius: 10px;
+            box-shadow: 1px 2px 10px #000;
+            background-color: #E9EEF2;
+            margin: auto;
+        }
+
+        .xmlcard .xmlcard-title {
+            padding: 5px;
+            color: #fff;
+            letter-spacing: 2px;
+            text-align: center;
+            text-transform: uppercase;
+            background-color: #2C6C73;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .xmlcard .xmlcard-id {
+            padding: 5px;
+            display: flex;
+            color: black;
+        }
+
+        .xmlcard .xmlcard-number{
+            display: inherit;
+            margin-right: 50px;
+        }
+
+        .xmlcard .xmlcard-information {
+            display: flex;
+            padding: 5px;
+            color: black;
+        }
+
+        .xmlcard .xmlcard-photo {
+            background-position: center;
+            background-repeat: none;
+            border: solid 2px #000;
+            height: 150px;
+            width: 150px;
+        }
+
+        .xmlcard .xmlcard-detail {
+            display: flex;
+        }
+        .xmlcard .xmlcard-text{
+            margin-left: 5px;
+            text-align: left;
+        }
+        .xmlcard .xmlcard-box {
+            margin-right: 20px;
+        }
+
+        .xmlcard .xmlcard-cardsign {
+            background: no-repeat url(https://fontmeme.com/permalink/200329/2719511201202ec68d51bbc66ea58d25.png);
+            background-position: center;
+            height: 38px;
+            width: 350px;
+        }
+
+        .xmlcard .xmlcard-code {
+            padding: 5px;
+            background-color: #fff;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            color: black;
+        }
+        .d-inline{
+            display: inline-block!important;
+        }
+        .my-0{
+            margin-top: 0!important;
+            margin-bottom: 0!important;
+        }
+    </style>
+</head>
+<body>
+    <div class="xmlcard">
+                <div class="xmlcard-title">
+                    <h1>République Francaise</h1>
+                </div>
+                <div class="xmlcard-id">
+                    <div class="xmlcard-number d-inline">
+                        <p class="xmlcard-cardtitle d-inline">Carte nationale d'identité :</p>
+                        <p th:text="${carte.numero}" class="d-inline"></p>
+                    </div>
+                    <p class="xmlcard-cardtitle d-inline">Nationalité [Francaise]</p>
+                </div>
+                <div class="xmlcard-information">
+                    <div class="xmlcard-photo  d-inline" th:style="'vertical-align: top; background: url(/img/' + ${carte.photo} + ') no-repeat, #BFAE99;;'"></div>
+                    <div class="xmlcard-text  d-inline">
+                        <div class="xmlcard-name my-0">
+                            <div class="xmlcard-box my-0">
+                                <p class="xmlcard-cardtitle">Nom :</p>
+                                <p class="d-inline" th:text="${carte.nom}"></p>
+                                &emsp;
+                                <p class="xmlcard-cardtitle">Prénom :</p>
+                                <p class="d-inline" th:text="${carte.prenom}"></p>
+                            </div>
+                        </div>
+                        <div class="xmlcard-detail my-0">
+                            <div class="xmlcard-box my-0">
+                                <p class="xmlcard-cardtitle">Sexe :</p>
+                                <p class="d-inline" th:text="${carte.sexe}"></p>
+                            </div>
+                            <br/>
+                            <div class="xmlcard-box my-0">
+                                <p class="xmlcard-cardtitle">Né(e) le :</p>
+                                <p class="d-inline" th:text="${carte.dateNaissance}"></p>
+                            </div>
+                            <div class="xmlcard-box my-0">
+                                <p class="xmlcard-cardtitle">Ville :</p>
+                                <p class="d-inline" th:text="${carte.lieuNaissance}"></p>
+                            </div>
+                        </div>
+                        <div class="xmlcard-sign">
+                            <p class="xmlcard-cardtitle">Signature du titulaire :</p>
+                            <div class="xmlcardsign" th:style="'background: no-repeat url(/img/' + ${carte.signature} + ');'"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="xmlcard-code">
+                    <p>
+                        &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+                        <br/>
+                        &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+                    </p>
+                </div>
+            </div>
+</body>
+</html>

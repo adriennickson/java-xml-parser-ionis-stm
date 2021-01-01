@@ -6,13 +6,13 @@
         <nom>TOMAS</nom>
         <prenom>CORINE</prenom>
         <sexe valeur="F"/>
-        <naissance date="06/12/1965" lieu="PARIS 1ER (75)"/>
+        <naissance date="1965-12-06" lieu="PARIS 1ER (75)"/>
         <taille>1M70</taille>
         <signature src="signature02.png"/>
     </recto>
     <verso>
         <adresse>104 RUE DES FLEURS 92100 BOULOGNE BILLANCOURT (92)</adresse>
-        <date delivrance="21/06/1998" expiration="22/06/1988"/>
+        <date delivrance="1998-06-21" expiration="1988-06-22"/>
         <par>SOUS-PREFECTURE DE BOULOGNE BILLANCOURT (92)</par>
     </verso>
 </carte>

@@ -29,7 +29,7 @@
                         <p class="xmlcard-cardtitle">Carte nationale d'identité :</p>
                         <p th:text="${carte.numero}"></p>
                     </div>
-                    <p class="xmlcard-cardtitle">Nationalité Francaise</p>
+                    <p class="xmlcard-cardtitle">Nationalité [Francaise]</p>
                 </div>
                 <div class="xmlcard-information">
                     <div class="xmlcard-photo" th:style="'background: url(/img/' + ${carte.photo} + ') no-repeat, #BFAE99;;'"></div>
@@ -70,16 +70,10 @@
                     </p>
                 </div>
             </div>
-
-
-            <span th:text="${carte.photo}"></span>
-            ---
-            <span th:text="${carte.taille}"></span>
-            <span th:text="${carte.signature}"></span>
-            <span th:text="${carte.adresse}"></span>
-            <span th:text="${carte.dateDelivrance}"></span>
-            <span th:text="${carte.dateExpiration}"></span>
-            <span th:text="${carte.par}"></span>
+            <div class="row p-2">
+                <a th:href="'/one?id='+${carte.numero}" target="_blank" class="m-1 col btn btn-primary">Modifier</a>
+                <a th:href="'/one?id='+${carte.numero}" target="_blank" class="m-1 col btn btn-primary">Pélécharger le PDF</a>
+            </div>
         </div>
     </div>
 </div>

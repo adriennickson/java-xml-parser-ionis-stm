@@ -26,39 +26,40 @@
                 </div>
                 <div class="xmlcard-id">
                     <div class="xmlcard-number">
-                        <p class="xmlcardtitle">Carte nationale d'identité :</p>
+                        <p class="xmlcard-cardtitle">Carte nationale d'identité :</p>
                         <p th:text="${carte.numero}"></p>
                     </div>
-                    <p class="xmlcardtitle">Nationalité Francaise</p>
+                    <p class="xmlcard-cardtitle">Nationalité Francaise</p>
                 </div>
                 <div class="xmlcard-information">
                     <div class="xmlcard-photo" th:style="'background: url(/img/' + ${carte.photo} + ') no-repeat, #BFAE99;;'"></div>
                     <div class="xmlcard-text">
                         <div class="xmlcard-name">
                             <div class="xmlcard-box">
-                                <p class="xmlcardtitle">Nom :</p>
-                                <p th:text="${carte.nom}"></p>
+                                <p class="xmlcard-cardtitle">Nom :</p>
+                                <p class="d-inline" th:text="${carte.nom}"></p>
                                 &emsp;
-                                <p class="xmlcardtitle">Prénom :</p>
-                                <p th:text="${carte.prenom}"></p>
+                                <p class="xmlcard-cardtitle">Prénom :</p>
+                                <p class="d-inline" th:text="${carte.prenom}"></p>
                             </div>
                         </div>
                         <div class="xmlcard-detail">
                             <div class="xmlcard-box">
-                                <p class="xmlcardtitle">Sexe :</p>
-                                <p th:text="${carte.sexe}"></p>
+                                <p class="xmlcard-cardtitle">Sexe :</p>
+                                <p class="d-inline" th:text="${carte.sexe}"></p>
+                            </div>
+                            <br/>
+                            <div class="xmlcard-box">
+                                <p class="xmlcard-cardtitle">Né(e) le :</p>
+                                <p class="d-inline" th:text="${carte.dateNaissance}"></p>
                             </div>
                             <div class="xmlcard-box">
-                                <p class="xmlcardtitle">Né(e) le :</p>
-                                <p th:text="${carte.dateNaissance}"></p>
-                            </div>
-                            <div class="xmlcard-box">
-                                <p class="xmlcardtitle">Ville :</p>
-                                <p th:text="${carte.lieuNaissance}"></p>
+                                <p class="xmlcard-cardtitle">Ville :</p>
+                                <p class="d-inline" th:text="${carte.lieuNaissance}"></p>
                             </div>
                         </div>
                         <div class="xmlcard-sign">
-                            <p class="xmlcardtitle">Signature du titulaire :</p>
+                            <p class="xmlcard-cardtitle">Signature du titulaire :</p>
                             <div class="xmlcardsign" th:style="'background: no-repeat url(/img/' + ${carte.signature} + ');'"></div>
                         </div>
                     </div>

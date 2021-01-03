@@ -111,6 +111,13 @@ p {font-size: 16px;}
     width: 150px;
 }
 
+.xmlcard .xmlcard-puce {
+    background-position: center;
+    background-repeat: none;
+    height: 30px;
+    width: 30px;
+}
+
 .xmlcard .xmlcard-detail {
     display: flex;
 }

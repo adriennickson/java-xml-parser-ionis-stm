@@ -22,14 +22,14 @@
         <div class="col-sm-6" th:each="carte: ${cartes}">
             <div class="xmlcard">
                 <div class="xmlcard-title">
-                    <h1>République Francaise</h1>
+                    <h1>République  <span th:text="${carte.nationality}"></span></h1>
                 </div>
                 <div class="xmlcard-id">
                     <div class="xmlcard-number">
                         <p class="xmlcard-cardtitle">Carte nationale d'identité :</p>
                         <p th:text="${carte.numero}"></p>
                     </div>
-                    <p class="xmlcard-cardtitle">Nationalité [Francaise]</p>
+                    <p class="xmlcard-cardtitle">Nationalité <span th:text="${carte.nationality}"></span></p>
                 </div>
                 <div class="xmlcard-information">
                     <div class="xmlcard-photo" th:style="'background: url(/img/' + ${carte.photo} + ') no-repeat, #BFAE99;;'"></div>
@@ -60,19 +60,20 @@
                         </div>
                         <div class="xmlcard-sign">
                             <p class="xmlcard-cardtitle">Signature du titulaire :</p>
-                            <div class="xmlcardsign" th:style="'background: no-repeat url(/img/' + ${carte.signature} + ');'"></div>
+                            <div class="xmlcardsign" th:style="'display: inline-block; background: no-repeat url(/img/' + ${carte.signature} + ');height: 30px; width: 350px;'"></div>
                         </div>
                     </div>
+                    <div class="xmlcard-puce d-inline" th:style="'vertical-align: top; background: url(data:image/png;base64,' + ${carte.puceBase64} + ') no-repeat;background-size: cover;'"></div>
                 </div>
                 <div class="xmlcard-code">
                     <p>
-                        <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< <br> <<<<<<<<<<<<<<<<<<<<<<<<
+                        <span th:text="${carte.code}"></span>
                     </p>
                 </div>
             </div>
             <div class="row p-2">
                 <a th:href="'/one?id='+${carte.numero}" target="_blank" class="m-1 col btn btn-primary">Modifier</a>
-                <a th:href="'/pdf?id='+${carte.numero}" target="_blank" class="m-1 col btn btn-primary">Pélécharger le PDF</a>
+                <a th:href="'/pdf?id='+${carte.numero}" target="_blank" class="m-1 col btn btn-primary">Télécharger le PDF</a>
             </div>
         </div>
     </div>

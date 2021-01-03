@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -73,6 +75,20 @@ public class MainController {
             if (cartes.get(i).getNumero().equals(id)){
                 carte = cartes.get(i);
             }
+        }
+        try {
+            carte.setPhoto( Base64.getEncoder().encodeToString(
+                    Files.readAllBytes( ( new File( "src/main/resources/static/img/" + carte.getPhoto() ) ).toPath() )
+            ) );
+            carte.setSignature( Base64.getEncoder().encodeToString(
+                    Files.readAllBytes( ( new File( "src/main/resources/static/img/" + carte.getSignature() ) ).toPath() )
+            ) );
+            if (carte.isPuce())
+                carte.setPuceBase64( Base64.getEncoder().encodeToString(
+                        Files.readAllBytes( ( new File( "src/main/resources/static/img/puce.png" ) ).toPath() )
+                ) );
+        }catch (Exception e){
+            e.printStackTrace();
         }
 
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
@@ -184,6 +200,37 @@ public class MainController {
         carte.setDateDelivrance(n.getChildNodes().item(1).getChildNodes().item(1).getAttributes().item(0).getNodeValue());
         carte.setDateExpiration(n.getChildNodes().item(1).getChildNodes().item(1).getAttributes().item(1).getNodeValue());
         carte.setPar(n.getChildNodes().item(1).getChildNodes().item(2).getTextContent());
+        carte.setNationality(n.getChildNodes().item(2).getChildNodes().item(0).getAttributes().item(0).getNodeValue());
+        carte.setNationalityCode(n.getChildNodes().item(2).getChildNodes().item(0).getNodeName());
+
+        if (n.getChildNodes().item(2).getChildNodes().item(0).getChildNodes().getLength() > 0 )
+            carte.setPuce(true);
+        else
+            carte.setPuce(false);
+
+        carte.setCode(
+                "ID" +
+                        n.getChildNodes().item(2).getChildNodes().item(0).getNodeName() +
+                        carte.getNom().replaceAll("\\s+","") +
+                        "<<<<<<<<<<<<<<<<<<<<<<<<<<<" +
+                        carte.getNumero() +
+                        carte.getPrenom().replaceAll("\\s+","") +
+                        "<<<<<<<" +
+                        carte.getDateNaissance().split("-")[0].split("")[2] + // l'année
+                        carte.getDateNaissance().split("-")[0].split("")[3] + // l'année
+                        carte.getDateNaissance().split("-")[1] + // mois
+                        carte.getDateNaissance().split("-")[2] + // Jour
+                        carte.getSexe()
+        );
+
+        try {
+            if (carte.isPuce())
+                carte.setPuceBase64( Base64.getEncoder().encodeToString(
+                        Files.readAllBytes( ( new File( "src/main/resources/static/img/puce.png" ) ).toPath() )
+                ) );
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         return carte;
     }
@@ -242,6 +289,14 @@ public class MainController {
             date.setAttribute("delivrance", carte.getDateDelivrance());
             date.setAttribute("expiration", carte.getDateExpiration());
 
+            Element nationalite = xml.createElement("nationalite");
+            Element pays = xml.createElement(carte.getNationalityCode());
+            pays.setAttribute("fullname", carte.getNationality());
+            if (carte.isPuce()){
+                Element puce = xml.createElement("puce");
+                pays.appendChild(puce);
+            }
+
             Element par = xml.createElement("par");
             par.setTextContent(carte.getPar());
 
@@ -258,9 +313,13 @@ public class MainController {
             verso.appendChild(adresse);
             verso.appendChild(date);
             verso.appendChild(par);
+
+            nationalite.appendChild(pays);
+
             //nous ajoutons donc les nœuds "recto" et "verso" au nœud "carte"
             root.appendChild(recto);
             root.appendChild(verso);
+            root.appendChild(nationalite);
 
             //On crée un fichier xml correspondant au résultat
             //construire la transformation inactive

@@ -22,8 +22,9 @@
         <div class="col" th:if="${carte.numero != null}">
             <form action="#" th:action="@{/one}" th:object="${carte}" method="post" class="col-8 offset-2">
                 <input  type="hidden" th:field="*{numero}" />
-                <input  type="hidden" th:field="*{photo}" />
-                <input  type="hidden" th:field="*{signature}" />
+                <input  type="hidden" th:field="*{nationalityCode}" />
+                <input  type="hidden" th:field="*{nationality}" />
+                <input  type="hidden" th:field="*{puce}" />
                 <div class="form-group text-left">
                     <div class="row">
                         <div class="col-4">
@@ -41,6 +42,19 @@
                         </div>
                         <div class="col-8">
                             <input  class="form-control" th:placeholder="${carte.prenom}" th:field="*{prenom}" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group text-left">
+                    <div class="row">
+                        <div class="col-4">
+                            <label th:for="${carte.photo}">photo:</label>
+                        </div>
+                        <div class="col-8">
+                            <select class="form-control"  th:placeholder="${carte.photo}" th:field="*{photo}" >
+                                <option th:value="img_avatar01.png">Avatar Homme</option>
+                                <option th:value="img_avatar02.png">Avatar Femme</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -124,6 +138,20 @@
                         </div>
                         <div class="col-8">
                             <input  class="form-control" th:placeholder="${carte.par}" th:field="*{par}" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group text-left">
+                    <div class="row">
+                        <div class="col-4">
+                            <label th:for="${carte.signature}">Modèle de signature:</label>
+                        </div>
+                        <div class="col-8">
+                            <select class="form-control"  th:placeholder="${carte.signature}" th:field="*{signature}" >
+                                <option th:value="signature01.png">Modèle 01</option>
+                                <option th:value="signature02.png">Modèle 02</option>
+                            </select>
                         </div>
                     </div>
                 </div>

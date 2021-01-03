@@ -58,6 +58,13 @@
             width: 150px;
         }
 
+        .xmlcard .xmlcard-puce {
+            background-position: center;
+            background-repeat: none;
+            height: 30px;
+            width: 30px;
+        }
+
         .xmlcard .xmlcard-detail {
             display: flex;
         }
@@ -95,53 +102,50 @@
 <body>
     <div class="xmlcard">
                 <div class="xmlcard-title">
-                    <h1>République Francaise</h1>
+                    <h1>République <span th:text="${carte.nationality}"></span></h1>
                 </div>
                 <div class="xmlcard-id">
                     <div class="xmlcard-number d-inline">
                         <p class="xmlcard-cardtitle d-inline">Carte nationale d'identité :</p>
                         <p th:text="${carte.numero}" class="d-inline"></p>
                     </div>
-                    <p class="xmlcard-cardtitle d-inline">Nationalité [Francaise]</p>
+                    <p class="xmlcard-cardtitle d-inline">Nationalité <span th:text="${carte.nationality}"></span></p>
                 </div>
                 <div class="xmlcard-information">
-                    <div class="xmlcard-photo  d-inline" th:style="'vertical-align: top; background: url(/img/' + ${carte.photo} + ') no-repeat, #BFAE99;;'"></div>
+                    <div class="xmlcard-photo d-inline" th:style="'vertical-align: top; background: url(data:image/png;base64,' + ${carte.photo} + ') no-repeat, #BFAE99;;'"></div>
                     <div class="xmlcard-text  d-inline">
                         <div class="xmlcard-name my-0">
                             <div class="xmlcard-box my-0">
                                 <p class="xmlcard-cardtitle">Nom :</p>
                                 <p class="d-inline" th:text="${carte.nom}"></p>
-                                &emsp;
                                 <p class="xmlcard-cardtitle">Prénom :</p>
                                 <p class="d-inline" th:text="${carte.prenom}"></p>
                             </div>
                         </div>
                         <div class="xmlcard-detail my-0">
-                            <div class="xmlcard-box my-0">
+                            <div class="xmlcard-box my-0 d-inline">
                                 <p class="xmlcard-cardtitle">Sexe :</p>
                                 <p class="d-inline" th:text="${carte.sexe}"></p>
                             </div>
-                            <br/>
-                            <div class="xmlcard-box my-0">
+                            <div class="xmlcard-box my-0 d-inline">
                                 <p class="xmlcard-cardtitle">Né(e) le :</p>
                                 <p class="d-inline" th:text="${carte.dateNaissance}"></p>
                             </div>
-                            <div class="xmlcard-box my-0">
+                            <div class="xmlcard-box my-0 d-inline">
                                 <p class="xmlcard-cardtitle">Ville :</p>
                                 <p class="d-inline" th:text="${carte.lieuNaissance}"></p>
                             </div>
                         </div>
                         <div class="xmlcard-sign">
                             <p class="xmlcard-cardtitle">Signature du titulaire :</p>
-                            <div class="xmlcardsign" th:style="'background: no-repeat url(/img/' + ${carte.signature} + ');'"></div>
+                            <div class="xmlcardsign" th:style="'background: no-repeat url(data:image/png;base64,' + ${carte.signature} + ');height: 30px; width: 350px;'"></div>
                         </div>
                     </div>
+                    <div class="xmlcard-puce d-inline" th:style="'vertical-align: top; background: url(data:image/png;base64,' + ${carte.puceBase64} + ') no-repeat;background-size: cover;'"></div>
                 </div>
                 <div class="xmlcard-code">
                     <p>
-                        &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
-                        <br/>
-                        &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+                        <span th:text="${carte.code}" style="font-size: .9em"></span>
                     </p>
                 </div>
             </div>

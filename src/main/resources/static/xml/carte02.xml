@@ -15,4 +15,9 @@
         <date delivrance="1998-06-21" expiration="1988-06-22"/>
         <par>SOUS-PREFECTURE DE BOULOGNE BILLANCOURT (92)</par>
     </verso>
+    <nationalite>
+        <GER fullname="ALLEMANDE">
+            <puce/>
+        </GER>
+    </nationalite>
 </carte>

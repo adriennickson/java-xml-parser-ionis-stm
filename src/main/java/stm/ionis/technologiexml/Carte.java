@@ -15,6 +15,11 @@ public class Carte {
     private String dateDelivrance;
     private String dateExpiration;
     private String par;
+    private String nationality;
+    private boolean puce;
+    private String nationalityCode;
+    private String code;
+    private String puceBase64;
 
     public Carte(String numero) {
         this.numero = numero;
@@ -118,5 +123,45 @@ public class Carte {
 
     public void setPar(String par) {
         this.par = par;
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
+    public boolean isPuce() {
+        return puce;
+    }
+
+    public void setPuce(boolean puce) {
+        this.puce = puce;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getNationalityCode() {
+        return nationalityCode;
+    }
+
+    public void setNationalityCode(String nationalityCode) {
+        this.nationalityCode = nationalityCode;
+    }
+
+    public String getPuceBase64() {
+        return puceBase64;
+    }
+
+    public void setPuceBase64(String puceBase64) {
+        this.puceBase64 = puceBase64;
     }
 }

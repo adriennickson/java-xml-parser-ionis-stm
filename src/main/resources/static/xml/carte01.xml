@@ -3,10 +3,10 @@
 <carte numero="880692310286">
     <recto>
         <photo src="img_avatar01.png"/>
-        <nom>MAXIME</nom>
-        <prenom>LEDUC</prenom>
+        <nom>MAXIME XYZ</nom>
+        <prenom>LEDUC XYZ</prenom>
         <sexe valeur="M"/>
-        <naissance date="1965-12-06" lieu="PARIS 1ER (75)"/>
+        <naissance date="1963-12-06" lieu="Dijon"/>
         <taille>1M70</taille>
         <signature src="signature01.png"/>
     </recto>
@@ -15,4 +15,7 @@
         <date delivrance="1998-06-21" expiration="1988-06-22"/>
         <par>SOUS-PREFECTURE DE BOULOGNE BILLANCOURT (92)</par>
     </verso>
+    <nationalite>
+        <FRA fullname="FRANCAISE"/>
+    </nationalite>
 </carte>

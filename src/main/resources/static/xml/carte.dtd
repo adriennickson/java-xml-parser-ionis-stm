@@ -1,6 +1,7 @@
-<!ELEMENT carte (recto,verso) >
+<!ELEMENT carte (recto,verso, nationalite) >
 <!ELEMENT recto (photo,nom,prenom,sexe,naissance,taille,signature) >
 <!ELEMENT verso (adresse,date,par) >
+<!ELEMENT nationalite (FRA|GER|BEL)>
 
 <!ELEMENT nom (#PCDATA) >
 <!ELEMENT prenom (#PCDATA) >
@@ -12,6 +13,10 @@
 <!ELEMENT naissance EMPTY >
 <!ELEMENT signature EMPTY >
 <!ELEMENT date EMPTY >
+<!ELEMENT FRA EMPTY >
+<!ELEMENT GER (puce) >
+<!ELEMENT BEL (puce) >
+<!ELEMENT puce EMPTY >
 
 <!ATTLIST carte numero CDATA #REQUIRED >
 <!ATTLIST sexe valeur CDATA #REQUIRED >
@@ -21,4 +26,8 @@
                 expiration CDATA #REQUIRED >
 <!ATTLIST photo src CDATA #IMPLIED >
 <!ATTLIST signature src CDATA #IMPLIED >
+
+<!ATTLIST FRA fullname CDATA #REQUIRED >
+<!ATTLIST GER fullname CDATA #REQUIRED >
+<!ATTLIST BEL fullname CDATA #REQUIRED >
 
